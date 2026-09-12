@@ -1,5 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
 import mysql.connector
+import os
+from dotenv import load_dotenv
+
+# Membaca file .env jika ada di lokal
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -9,10 +14,11 @@ app = Flask(__name__)
 # =========================
 def get_db():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="bookingciremai"
+        host=os.getenv("MYSQLHOST", "localhost"),
+        user=os.getenv("MYSQLUSER", "root"),
+        password=os.getenv("MYSQLPASSWORD", ""),
+        database=os.getenv("MYSQLDATABASE", "bookingciremai"),
+        port=int(os.getenv("MYSQLPORT", 3306))
     )
 
 
@@ -287,6 +293,5 @@ def konfirmasi(id):
 # JALANKAN FLASK
 # =========================
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
