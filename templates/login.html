@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Login - Booking Online Gunung Ciremai</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body class="login-page">
+
+```
+<div class="login-overlay"></div>
+
+<div class="login-card">
+
+    <div class="login-header">
+
+        <p class="login-label">
+            GUNUNG CIREMAI
+        </p>
+
+        <h1>
+            Booking Online
+        </h1>
+
+        <p>
+            Silakan login untuk melanjutkan
+        </p>
+
+    </div>
+
+
+    <form method="POST">
+
+        <div class="login-form-group">
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Masukkan username"
+                required
+            >
+
+        </div>
+
+
+        <div class="login-form-group">
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Masukkan password"
+                required
+            >
+
+        </div>
+
+
+        <button type="submit" class="login-button">
+            Login
+        </button>
+
+    </form>
+
+
+    <div class="register-link">
+
+        <p>
+            Belum punya akun?
+        </p>
+
+        <a href="/register">
+            Daftar di sini
+        </a>
+
+    </div>
+
+</div>
+```
+
+</body>
+
+</html>

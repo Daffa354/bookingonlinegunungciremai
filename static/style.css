@@ -1,0 +1,776 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7f6;
+    color: #222;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 70px;
+    padding: 0 8%;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #1f3d2b;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.nav-menu a:hover {
+    color: #1f3d2b;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    width: 100%;
+    padding: 30px 0 45px;
+    background: #f5f6f7;
+}
+
+
+/* =========================
+   FOTO UTAMA
+========================= */
+
+.hero-photo {
+    width: 100%;
+    height: 500px;
+
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 25px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+}
+
+.hero-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center 35%;
+
+    display: block;
+}
+
+
+/* =========================
+   OVERLAY FOTO
+========================= */
+
+.photo-overlay {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.18),
+        rgba(0, 0, 0, 0.50)
+    );
+}
+
+
+/* =========================
+   TULISAN DI ATAS FOTO
+========================= */
+
+.hero-content {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 90%;
+
+    text-align: center;
+
+    color: white;
+
+    z-index: 2;
+}
+
+.small-title {
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 15px;
+
+    opacity: 0.9;
+}
+
+.hero h1 {
+    font-size: 52px;
+
+    line-height: 1.1;
+
+    margin-bottom: 18px;
+
+    font-weight: 700;
+}
+
+.description {
+    font-size: 18px;
+
+    margin-bottom: 30px;
+
+    opacity: 0.95;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn {
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    background: white;
+
+    color: #222;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #eeeeee;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   INFO
+========================= */
+
+.info {
+    width: 84%;
+
+    margin: 0 auto 50px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.info-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.info-card h3 {
+    margin-bottom: 10px;
+
+    font-size: 17px;
+
+    color: #1f3d2b;
+}
+
+.info-card p {
+    color: #666;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 25px;
+
+    background: #1f3d2b;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVE / HP
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .nav-menu {
+        gap: 15px;
+    }
+
+    .nav-menu a {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 20px 5% 35px;
+    }
+
+    .hero-photo {
+        height: 400px;
+        border-radius: 18px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .small-title {
+        font-size: 11px;
+        letter-spacing: 3px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .info {
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================
+   HALAMAN BOOKING
+========================= */
+
+.booking-page {
+    min-height: calc(100vh - 70px);
+
+    padding: 50px 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    position: relative;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("/static/forum.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+.booking-card {
+    width: 100%;
+    max-width: 650px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    padding: 40px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+
+    position: relative;
+    z-index: 2;
+}
+
+
+.booking-header {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+
+.booking-label {
+    color: #1f3d2b;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+
+.booking-header h1 {
+    font-size: 32px;
+
+    color: #222;
+
+    margin-bottom: 8px;
+}
+
+
+.booking-header p:last-child {
+    color: #777;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #333;
+}
+
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    outline: none;
+
+    transition: 0.2s;
+
+    background: #fafafa;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #1f3d2b;
+
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(31, 61, 43, 0.08);
+}
+
+
+.form-group textarea {
+    resize: vertical;
+}
+
+
+/* =========================
+   HARGA
+========================= */
+
+.price-box {
+    background: #f1f5f2;
+
+    border-radius: 12px;
+
+    padding: 17px 20px;
+
+    margin: 25px 0;
+
+    border-left: 4px solid #1f3d2b;
+}
+
+
+.price-box div {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.price-box span {
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+.price-box strong {
+    color: #1f3d2b;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   BUTTON BOOKING
+========================= */
+
+.booking-button {
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #1f3d2b;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.booking-button:hover {
+    background: #163021;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   MOBILE BOOKING
+========================= */
+
+@media (max-width: 600px) {
+
+    .booking-page {
+        padding: 25px 15px;
+
+        background-attachment: scroll;
+    }
+
+    .booking-card {
+        padding: 25px 20px;
+
+        border-radius: 18px;
+    }
+
+    .booking-header h1 {
+        font-size: 27px;
+    }
+
+    .price-box div {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}
+/* =========================
+   LOGIN
+========================= */
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    background-image: url("/static/beranda.jpeg");
+    background-size: cover;
+    background-position: center 30%;
+
+    padding: 30px 20px;
+}
+
+
+/* LAPISAN GELAP */
+
+.login-overlay {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.50);
+}
+
+
+/* KOTAK LOGIN */
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    padding: 40px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.30);
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* HEADER */
+
+.login-header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.login-label {
+    color: #1f3d2b;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.login-header h1 {
+    font-size: 30px;
+
+    margin-bottom: 8px;
+
+    color: #222;
+}
+
+.login-header p:last-child {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* INPUT */
+
+.login-form-group {
+    margin-bottom: 20px;
+}
+
+.login-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #333;
+}
+
+.login-form-group input {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    background: #fafafa;
+
+    transition: 0.2s;
+}
+
+.login-form-group input:focus {
+    border-color: #1f3d2b;
+
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(31, 61, 43, 0.08);
+}
+
+
+/* BUTTON */
+
+.login-button {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #1f3d2b;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.login-button:hover {
+    background: #163021;
+
+    transform: translateY(-1px);
+}
+
+
+/* DAFTAR */
+
+.register-link {
+    text-align: center;
+
+    margin-top: 25px;
+}
+
+.register-link p {
+    display: inline;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.register-link a {
+    margin-left: 5px;
+
+    color: #1f3d2b;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* HP */
+
+@media (max-width: 600px) {
+
+    .login-card {
+        padding: 30px 22px;
+
+        border-radius: 18px;
+    }
+
+    .login-header h1 {
+        font-size: 26px;
+    }
+}
+.qris-image {
+    display: block !important;
+    width: 180px !important;
+    height: 180px !important;
+    max-width: 180px !important;
+    max-height: 180px !important;
+    object-fit: contain;
+    margin: 15px auto !important;
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Status Booking - Gunung Ciremai</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .status {
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: #fff4d6;
+            color: #9a6a00;
+        }
+
+        .detail {
+            background: #f7f8f8;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .detail p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        {% if booking.status == "Booking Berhasil" %}
+
+            <div class="icon">✅</div>
+
+            <h1>Booking Berhasil</h1>
+
+            <p class="subtitle">
+                Pembayaran kamu sudah dikonfirmasi oleh admin.
+            </p>
+
+            <div class="status">
+                🟢 Booking Berhasil
+            </div>
+
+        {% elif booking.status == "Menunggu Konfirmasi Admin" %}
+
+            <div class="icon">⏳</div>
+
+            <h1>Menunggu Konfirmasi</h1>
+
+            <p class="subtitle">
+                Pembayaran kamu sedang diperiksa oleh admin.
+            </p>
+
+            <div class="status">
+                🟡 Menunggu Konfirmasi Admin
+            </div>
+
+        {% else %}
+
+            <div class="icon">💳</div>
+
+            <h1>Menunggu Pembayaran</h1>
+
+            <p class="subtitle">
+                Silakan lakukan pembayaran terlebih dahulu.
+            </p>
+
+            <div class="status">
+                🟡 Menunggu Pembayaran
+            </div>
+
+        {% endif %}
+
+        <div class="detail">
+
+            <p>
+                <b>Ketua:</b> {{ booking.nama }}
+            </p>
+
+            <p>
+                <b>Tanggal Pendakian:</b> {{ booking.tanggal }}
+            </p>
+
+            <p>
+                <b>Jumlah Pendaki:</b> {{ booking.jumlah }} orang
+            </p>
+
+            <p>
+                <b>Total Pembayaran:</b>
+                Rp {{ "{:,.0f}".format(booking.total).replace(",", ".") }}
+            </p>
+
+        </div>
+
+        <a href="/home" class="btn">
+            Kembali ke Beranda
+        </a>
+
+    </div>
+
+</body>
+</html>

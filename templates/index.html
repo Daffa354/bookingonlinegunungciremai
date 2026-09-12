@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Booking Online Gunung ciremai</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <div class="logo">
+        ciremai
+    </div>
+
+    <div class="nav-menu">
+        <a href="/home">Beranda</a>
+        <a href="/booking">Booking</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-photo">
+
+        <img
+            src="{{ url_for('static', filename='beranda.jpeg') }}"
+            alt="Gunung Ciremai"
+        >
+
+        <div class="photo-overlay"></div>
+
+        <div class="hero-content">
+
+            <p class="small-title">
+                GUNUNG CIREMAI
+            </p>
+
+            <h1>
+                Booking Online<br>
+                Gunung Ciremai
+            </h1>
+
+            <p class="description">
+                Pendakian Jalur Kalibaru
+            </p>
+
+            <a href="/booking" class="btn">
+                Booking Sekarang
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INFO -->
+<section class="info">
+
+    <div class="info-card">
+        <h3>📍 Jalur Pendakian</h3>
+        <p>Kalibaru</p>
+    </div>
+
+    <div class="info-card">
+        <h3>💰 Harga</h3>
+        <p>Rp50.000 / orang</p>
+    </div>
+
+    <div class="info-card">
+        <h3>📱 Booking Online</h3>
+        <p>Praktis dan mudah</p>
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 Booking Online Gunung Ciremai
+    </p>
+
+</footer>
+```
+
+</body>
+
+</html>

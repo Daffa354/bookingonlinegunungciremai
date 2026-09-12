@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Booking - Gunung Ciremai</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <div class="logo">
+        CIREMAI
+    </div>
+
+    <div class="nav-menu">
+        <a href="/home">Beranda</a>
+        <a href="/booking">Booking</a>
+    </div>
+
+</nav>
+
+
+<!-- BOOKING -->
+<main class="booking-page">
+
+    <div class="booking-card">
+
+        <div class="booking-header">
+            <p class="booking-label">GUNUNG CIREMAI</p>
+
+            <h1>
+                Booking Pendakian
+            </h1>
+
+            <p>
+                Jalur Pendakian Kalibaru
+            </p>
+        </div>
+
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Nama Ketua Rombongan</label>
+
+                <input
+                    type="text"
+                    name="nama"
+                    placeholder="Masukkan nama lengkap"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Nomor WhatsApp</label>
+
+                <input
+                    type="text"
+                    name="whatsapp"
+                    placeholder="Contoh: 081234567890"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Tanggal Pendakian</label>
+
+                <input
+                    type="date"
+                    name="tanggal"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Jumlah Pendaki</label>
+
+                <input
+                    type="number"
+                    name="jumlah"
+                    min="1"
+                    placeholder="Jumlah orang"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Nama Anggota</label>
+
+                <textarea
+                    name="anggota"
+                    rows="5"
+                    placeholder="Masukkan nama anggota rombongan"
+                    required
+                ></textarea>
+            </div>
+
+
+            <div class="price-box">
+
+                <div>
+                    <span>Harga tiket</span>
+                    <strong>Rp50.000 / orang</strong>
+                </div>
+
+            </div>
+
+
+            <button type="submit" class="booking-button">
+                Lanjut ke Pembayaran
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Booking Online Gunung Ciremai
+    </p>
+
+</footer>
+```
+
+</body>
+
+</html>
