@@ -17,16 +17,30 @@ def get_db():
         host=os.getenv("MYSQLHOST", "localhost"),
         user=os.getenv("MYSQLUSER", "root"),
         password=os.getenv("MYSQLPASSWORD", ""),
-        database=os.getenv("MYSQLDATABASE", "bookingciremai"),
+        database=os.getenv("MYSQLDATABASE", "railway"),  # Menggunakan default database 'railway'
         port=int(os.getenv("MYSQLPORT", 3306))
     )
 
 
 # =========================
-# OTOMATIS BUAT TABEL
+# OTOMATIS BUAT DATABASE & TABEL
 # =========================
 def init_db():
     try:
+        # 1. Koneksi awal tanpa nama database untuk memastikan database terbentuk
+        conn = mysql.connector.connect(
+            host=os.getenv("MYSQLHOST", "localhost"),
+            user=os.getenv("MYSQLUSER", "root"),
+            password=os.getenv("MYSQLPASSWORD", ""),
+            port=int(os.getenv("MYSQLPORT", 3306))
+        )
+        cursor_init = conn.cursor()
+        db_name = os.getenv("MYSQLDATABASE", "railway")
+        cursor_init.execute(f"CREATE DATABASE IF NOT EXISTS `{db_name}`")
+        cursor_init.close()
+        conn.close()
+
+        # 2. Koneksi ke database yang sudah dipastikan ada
         db = get_db()
         cursor = db.cursor()
 
@@ -65,12 +79,12 @@ def init_db():
         db.commit()
         cursor.close()
         db.close()
-        print("Inisialisasi database berhasil!")
+        print("Inisialisasi database dan tabel berhasil!")
     except Exception as e:
         print("Gagal inisialisasi database:", e)
 
 
-# Jalankan pembuatan tabel saat aplikasi dimulai
+# Jalankan pembuatan database & tabel saat aplikasi dimulai
 init_db()
 
 
