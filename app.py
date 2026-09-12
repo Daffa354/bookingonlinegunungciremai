@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 import os
 from dotenv import load_dotenv
 
-# Membaca file .env jika ada di lokal
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY", "supersecretkeyciremai")
 
 
 # =========================
@@ -17,17 +17,16 @@ def get_db():
         host=os.getenv("MYSQLHOST", "localhost"),
         user=os.getenv("MYSQLUSER", "root"),
         password=os.getenv("MYSQLPASSWORD", ""),
-        database=os.getenv("MYSQLDATABASE", "railway"),  # Menggunakan default database 'railway'
+        database=os.getenv("MYSQLDATABASE", "railway"),
         port=int(os.getenv("MYSQLPORT", 3306))
     )
 
 
 # =========================
-# OTOMATIS BUAT DATABASE & TABEL
+# OTOMATIS BUAT DATABASE, TABEL & ADMIN
 # =========================
 def init_db():
     try:
-        # 1. Koneksi awal tanpa nama database untuk memastikan database terbentuk
         conn = mysql.connector.connect(
             host=os.getenv("MYSQLHOST", "localhost"),
             user=os.getenv("MYSQLUSER", "root"),
@@ -40,11 +39,10 @@ def init_db():
         cursor_init.close()
         conn.close()
 
-        # 2. Koneksi ke database yang sudah dipastikan ada
         db = get_db()
         cursor = db.cursor()
 
-        # Buat tabel users jika belum ada
+        # Buat tabel users
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -54,7 +52,7 @@ def init_db():
             );
         """)
 
-        # Buat tabel bookings jika belum ada
+        # Buat tabel bookings
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS bookings (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -68,23 +66,28 @@ def init_db():
             );
         """)
 
-        # Buat akun admin default jika belum ada
-        cursor.execute("SELECT * FROM users WHERE username = %s", ("admin",))
-        if not cursor.fetchone():
+        # Paksa buat/update akun admin daffa
+        cursor.execute("SELECT * FROM users WHERE username = %s", ("daffa",))
+        admin_user = cursor.fetchone()
+        if not admin_user:
             cursor.execute(
                 "INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
-                ("admin", "admin123", "admin")
+                ("daffa", "354313", "admin")
+            )
+        else:
+            cursor.execute(
+                "UPDATE users SET password = %s, role = %s WHERE username = %s",
+                ("354313", "admin", "daffa")
             )
 
         db.commit()
         cursor.close()
         db.close()
-        print("Inisialisasi database dan tabel berhasil!")
+        print("Inisialisasi database & admin daffa berhasil!")
     except Exception as e:
         print("Gagal inisialisasi database:", e)
 
 
-# Jalankan pembuatan database & tabel saat aplikasi dimulai
 init_db()
 
 
@@ -111,6 +114,9 @@ def login():
         db.close()
 
         if user:
+            session["username"] = user["username"]
+            session["role"] = user["role"]
+
             if user["role"] == "admin":
                 return redirect(url_for("admin"))
 
@@ -356,29 +362,17 @@ def konfirmasi(id):
 
 
 # =========================
+# LOGOUT
+# =========================
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
+
+
+# =========================
 # JALANKAN FLASK
 # =========================
-# =========================
-# ROUTE DARURAT BUAT ADMIN
-# =========================
-@app.route("/buat-admin")
-def buat_admin():
-    try:
-        db = get_db()
-        cursor = db.cursor()
-        
-        # Hapus akun daffa jika sudah ada sebelumnya, lalu buat baru sebagai admin
-        cursor.execute("DELETE FROM users WHERE username = 'daffa'")
-        cursor.execute("""
-            INSERT INTO users (username, password, role)
-            VALUES ('daffa', '354313', 'admin')
-        """)
-        db.commit()
-        cursor.close()
-        db.close()
-        return "Akun admin berhasil dibuat! Username: <b>daffa</b> | Password: <b>354313</b> <br><a href='/'>Klik di sini untuk Login</a>"
-    except Exception as e:
-        return f"Gagal membuat admin: {e}"
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
