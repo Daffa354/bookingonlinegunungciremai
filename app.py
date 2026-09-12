@@ -23,6 +23,58 @@ def get_db():
 
 
 # =========================
+# OTOMATIS BUAT TABEL
+# =========================
+def init_db():
+    try:
+        db = get_db()
+        cursor = db.cursor()
+
+        # Buat tabel users jika belum ada
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(100) NOT NULL UNIQUE,
+                password VARCHAR(255) NOT NULL,
+                role VARCHAR(20) DEFAULT 'user'
+            );
+        """)
+
+        # Buat tabel bookings jika belum ada
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS bookings (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                nama VARCHAR(100) NOT NULL,
+                whatsapp VARCHAR(20) NOT NULL,
+                tanggal DATE NOT NULL,
+                jumlah INT NOT NULL,
+                anggota TEXT,
+                total INT NOT NULL,
+                status VARCHAR(50) DEFAULT 'Menunggu Pembayaran'
+            );
+        """)
+
+        # Buat akun admin default jika belum ada
+        cursor.execute("SELECT * FROM users WHERE username = %s", ("admin",))
+        if not cursor.fetchone():
+            cursor.execute(
+                "INSERT INTO users (username, password, role) VALUES (%s, %s, %s)",
+                ("admin", "admin123", "admin")
+            )
+
+        db.commit()
+        cursor.close()
+        db.close()
+        print("Inisialisasi database berhasil!")
+    except Exception as e:
+        print("Gagal inisialisasi database:", e)
+
+
+# Jalankan pembuatan tabel saat aplikasi dimulai
+init_db()
+
+
+# =========================
 # LOGIN
 # =========================
 @app.route("/", methods=["GET", "POST"])
