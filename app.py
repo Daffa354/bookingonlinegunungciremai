@@ -358,6 +358,27 @@ def konfirmasi(id):
 # =========================
 # JALANKAN FLASK
 # =========================
+# =========================
+# ROUTE DARURAT BUAT ADMIN
+# =========================
+@app.route("/buat-admin")
+def buat_admin():
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        
+        # Hapus akun daffa jika sudah ada sebelumnya, lalu buat baru sebagai admin
+        cursor.execute("DELETE FROM users WHERE username = 'daffa'")
+        cursor.execute("""
+            INSERT INTO users (username, password, role)
+            VALUES ('daffa', '354313', 'admin')
+        """)
+        db.commit()
+        cursor.close()
+        db.close()
+        return "Akun admin berhasil dibuat! Username: <b>daffa</b> | Password: <b>354313</b> <br><a href='/'>Klik di sini untuk Login</a>"
+    except Exception as e:
+        return f"Gagal membuat admin: {e}"
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
