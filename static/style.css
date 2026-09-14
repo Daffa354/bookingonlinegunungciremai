@@ -765,12 +765,3 @@ footer {
         font-size: 26px;
     }
 }
-.qris-image {
-    display: block !important;
-    width: 180px !important;
-    height: 180px !important;
-    max-width: 180px !important;
-    max-height: 180px !important;
-    object-fit: contain;
-    margin: 15px auto !important;
-}
